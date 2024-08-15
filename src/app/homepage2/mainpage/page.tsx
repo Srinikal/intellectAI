@@ -1,11 +1,20 @@
-import Sidebar from "../../components/Sidebar";
-import Profile from "./../components/Profile";
-import PieChart from "../../components/PieChart";
+"use client";
+
+import Link from "next/link"
 import Image from "next/image";
+
+import Sidebar from "../../components/Sidebar";
+import Profile from "../../components/Profile";
+import PieChart from "../../components/PieChart";
 import FullInsight from "../../components/FullInsight";
 import PersonalOp from "../../components/PersonalOp";
 import BudgetTree from "../../components/BudgetTree";
 import Timeline from "../../components/Timeline";
+import Slider from "../../components/Slider";
+import IncomeCard from "../../components/IncomeCard";
+import MoneyCard from "../../components/MoneyCard";
+import BudgetingCard from "../../components/BudgetingCard";
+import SSCard from "../../components/SSCard";
 
 
 export default function Homepage2() {
@@ -21,62 +30,66 @@ export default function Homepage2() {
 
  return (
    <div className="relative">
-     <Sidebar></Sidebar>
-     
-     <div className="h-full min-h-[100vh] w-[100vw] pl-36 flex flex-col items-center justify-center">
-       <div className="flex flex-row flex-wrap justify-center items-stretch gap-[50px] h-[80%]">
-         <div className="flex flex-row mt-[50px]">
-           <p className="text-[#3A4F38] font-inter text-[96px]">Welcome Back, </p>
-           <p className="text-[#309d48] font-inter text-[96px]">Jackson!</p>
-         </div>
-         <div className="flex flex-row">
-           <p className="text-[#3A4F38] font-inter text-[40px]">See what progress you&apos;ve made.&nbsp;&nbsp;&nbsp;&nbsp;</p>
-           <Image src="/images/wallet.png" alt="Wallet" width={90} height={90}></Image>
-         </div>
-         <div className="flex flex-row gap-20">
-           <div className="flex flex-col gap-20">
-             <div className="bg-white shadow-md p-4 flex flex-col justify-between rounded-lg h-full w-full">
-               <p className="text-[#3A4F38] font-inter text-[35px]">Just one day away the weekend is in reach!</p>
-               <Image src="/images/wallet.png" alt="Wallet" width={180} height={180} className="translate-x-[50%]"></Image>
-             </div>
-             <div className="bg-white shadow-md p-4 flex flex-col justify-between rounded-lg h-full w-full"> 
-               <p className="text-black font-inter text-[35px]">Daily Savings:</p> 
-               <p className="text-[#4baa64] font-inter text-[80px]">$92.65</p>  
-               <div className="flex flex-row">
-                 <p className="text-black font-inter text-[20px]">(up&nbsp;</p>
-                 <p className="text-[#7dc090] font-inter text-[20px]">23.9%&nbsp;</p>
-                 <p className="text-black font-inter text-[20px]">from yesterday)</p>
-               </div>
-             </div>
-             <div className="bg-white shadow-md p-4 flex flex-col justify-between rounded-lg h-full w-full"> 
-               <p className="text-black font-inter text-[35px]">Weekly Savings:</p> 
-               <p className="text-[#4baa64] font-inter text-[80px]">$351.07</p>  
-               <div className="flex flex-row">
-                 <p className="text-black font-inter text-[20px]">(up&nbsp;</p>
-                 <p className="text-[#7dc090] font-inter text-[20px]">11.0%&nbsp;</p>
-                 <p className="text-black font-inter text-[20px]">from last week)</p>
-               </div>
-             </div>
+     <Sidebar/>
+     <Profile/>
+     <div className="h-full min-h-[100vh] w-[100vw] pl-36 flex flex-col items-center justify-center py-[116px]">
+      <p className="text-center font-inter text-6xl font-semibold leading-[150%] text-[#3A4F38]">Welcome Back,<span className="text-[rgba(1,135,33,0.70)] text-center font-inter text-56l font-semibold leading-[150%]"> Jackson!</span></p>
+      <div className="flex flex-col flex-wrap justify-center items-stretch h-[80%]">
+          <div className="flex flex-row justify-center items-center">
+            <p className="text-[#3A4F38] text-center font-inter text-[25px] font-semibold leading-[150%] pr-2">Just one day away, the weekend is in reach!</p>
+            <Image src="/images/wallet.png" alt="Wallet" width={50} height={50}></Image>
+          </div>
+
+        <div className="flex flex-row justify-center gap-16 pl-36 pr-10 pt-[0px]">
+          <Slider components={[
+            <MoneyCard key="moneyCard" />,
+            <IncomeCard key="incomeCard" />,
+            <BudgetingCard key="budgetingCard" />,
+            <SSCard key = "ssCard" />
+          ]} />
+          
+         <BudgetTree/>
+         <Timeline/>
+         <div className="flex flex-col gap-10 pt-20">
+           <div className="w-[209px] [background:#FBFBFF] shadow-[5px_4px_10px_0px_rgba(0,0,0,0.25)] rounded-[10px] border-b-[#516958] border-b border-solid px-[20px] py-[16px] flex flex-col items-start justify-center">
+             <p className="text-black font-inter text-[17px] font-semibold leading-[150%]">Daily Savings:</p>
+             <p className="text-[rgba(1,135,33,0.70)] font-inter text-[45px] font-semibold leading-[150%]">$92.65</p> 
+             
+               <p className="justify-center text-black font-inter text-xs font-semibold leading-[150%]">(up&nbsp;
+               <span className="w-[284.175px] h-[52px] justify-center text-[rgba(1,135,33,0.70)] font-inter text-xs font-semibold leading-[150%]">23.9%&nbsp;</span>from yesterday)</p>
+             
            </div>
-           <BudgetTree/>
-           <Timeline/>
-         </div>
-         <div className="[background:rgba(252,251,255,0.80)] rounded-[30px] border-4 border-solid border-[#2A3A28] flex flex-col justify-start items-center py-[32px] px-[60px] w-[60%] gap-5">
-           <p className="text-[#2A3A28] font-raleway text-3xl font-bold leading-[150%]">Your Personalized Wallet</p>     
-           <div className="relative">
-             <PieChart data={dataPie}></PieChart>
-             <Image src="/images/wallet.png" alt="Wallet" width={180} height={180} className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"></Image>
+           <div className="w-[209] [background:#FBFBFF] shadow-[5px_4px_10px_0px_rgba(0,0,0,0.25)] rounded-[10px] border-b-[#516958] border-b border-solid px-[20px] py-[16px] flex flex-col items-start justify-center">
+             <p className="text-black font-inter text-[17px] font-semibold leading-[150%]">Weekly Savings:</p>
+             <p className="text-[rgba(1,135,33,0.70)] font-inter text-[45px] font-semibold leading-[150%]">$351.07</p> 
+             
+               <p className="justify-center text-black font-inter text-xs font-semibold leading-[150%]">(up&nbsp;
+               <span className="w-[284.175px] h-[52px] justify-center text-[rgba(1,135,33,0.70)] font-inter text-xs font-semibold leading-[150%]">11.0%&nbsp;</span>from last week)</p>
+             
            </div>
+          </div>
+        </div>
+       
+       <div className="flex flex-row flex-wrap w-full items-center justify-center gap-[50px]">
+       <div className="w-[447px] h-[441px] shrink-0 [background:#FBFBFF] shadow-[5px_4px_10px_0px_rgba(0,0,0,0.25)] rounded-[10px] border-b-[#516958] border-b border-solid gap-5 flex flex-col justify-start items-center pt-[20px]">
+         <p className=" text-black text-center font-raleway text-[23px] font-bold leading-[150%]">Your Personalized Wallet</p>    
+         <div className="relative justify-center items-center">
+           <PieChart  data={dataPie}></PieChart>
+           <Link href="/PersonalizedWallet">
+           <Image src="/images/wallet.png" alt="Wallet" width={120} height={120} className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"></Image></Link>
          </div>
-         <div className="bg-[#FBFBFF] shadow-[5px_4px_10px_0px_rgba(0,0,0,0.25)] rounded-[10px] border-b-[#516958] border-b border-solid px-[50px] pt-[12px] pb-[46px] flex flex-col items-center justify-center">
-           <p className=" text-black font-raleway text-[40px] font-bold leading-[150%] text-start w-full">Your Spending: Optimized</p>
+       </div>
+        <div className="bg-[#FBFBFF] shadow-[5px_4px_10px_0px_rgba(0,0,0,0.25)] rounded-[10px] border-b-[#516958] border-b border-solid px-[30px] pt-[12px] pb-[26px] flex flex-col items-center justify-center h-[441px]">
+           <p className=" text-black font-raleway text-[21px] font-bold leading-[150%] text-start w-full pb-1">Your Spending: Optimized</p>
            <PersonalOp></PersonalOp>
-           <div className="border-1 border-[#D3D7EF] w-full self-center mt-8">
+           <div className="border-1 border-[#D3D7EF] w-full self-center mt-5">
            </div>
-           <div className="self-end mt-10 ">
-             <FullInsight link={"/homepage2"}></FullInsight>
+           <div className="self-end mt-5 ">
+             <FullInsight link={"/Optimization"}></FullInsight>
            </div>
          </div>
+       </div>
+       
        </div>
      </div>
    </div>

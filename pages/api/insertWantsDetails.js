@@ -2,25 +2,24 @@ import supabase from '../../lib/supabaseClient';
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    const { FullName, Email, Gender, UniversityName, DegreeProgram, YearOfGraduation, Birthday } = req.body;
+    const { ECExpenses, ClothingExpenses, ClothingType, SubscriptionExpenses, SubscriptionType, EntertainmentExpenses, EntertainmentType} = req.body;
 
     try {
       const userId = "f46ad135-f439-418e-b383-459a1ea78edb";
 
       const { data, error } = await supabase
-        .from('personal_details')
+        .from('wants_details')
         .upsert([{
           user_id: userId, 
-          first_name: FullName,
-          last_name: FullName,
-          birthday: Birthday,
-          gender: Gender,
-          college: UniversityName,
-          graduation_year: YearOfGraduation,
-          major: DegreeProgram
+          ec_expenses: ECExpenses,
+          clothing_expenses: ClothingExpenses,
+          clothing_type: ClothingType,
+          subscription_expenses: SubscriptionExpenses,
+          subscription_type: SubscriptionType,
+          entertainment_expenses: EntertainmentExpenses,
+          entertainment_type: EntertainmentType
           
-        }])
-        .select();
+        }]);
 
       if (error) throw error;
 
